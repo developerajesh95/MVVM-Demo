@@ -1,7 +1,5 @@
 package com.demo.mvvmdemo.data.repository
 
-import android.os.Handler
-import android.os.Looper
 import com.demo.mvvmdemo.data.dto.UserDto
 import com.demo.mvvmdemo.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow

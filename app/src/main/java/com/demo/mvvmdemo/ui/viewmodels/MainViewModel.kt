@@ -7,12 +7,15 @@ import com.demo.mvvmdemo.data.dto.UserDto
 import com.demo.mvvmdemo.data.dto.toUser
 import com.demo.mvvmdemo.domain.repository.UserRepository
 import com.demo.mvvmdemo.presentation.UserLoginState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     application: Application,
     private val userRepository: UserRepository
 ) : AndroidViewModel(application) {

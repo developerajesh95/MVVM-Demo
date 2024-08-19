@@ -3,23 +3,25 @@ package com.demo.mvvmdemo.ui.activities
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
-import com.demo.mvvmdemo.R
-import com.demo.mvvmdemo.data.repository.UserRepositoryImpl
 import com.demo.mvvmdemo.databinding.ActivityMainBinding
 import com.demo.mvvmdemo.domain.repository.UserRepository
 import com.demo.mvvmdemo.ui.viewmodels.MainViewModel
-import com.demo.mvvmdemo.ui.viewmodels.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainViewModel
+    @Inject
+    lateinit var userRepository: UserRepository
+
     private lateinit var binding: ActivityMainBinding
+
+    private val viewModel: MainViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +29,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val repository = UserRepositoryImpl()
-        val factory = ViewModelFactory(application, repository)
-        viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
+       /* val factory = ViewModelFactory(application, userRepository)
+        viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]*/
 
         binding.loginButton.setOnClickListener {
             val emailOrUsername = binding.emailEditText.text.toString().trim()
